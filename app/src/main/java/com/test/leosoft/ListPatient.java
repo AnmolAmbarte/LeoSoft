@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.test.leosoft.adapter.MainActivityAdapter;
 import com.test.leosoft.model.Patient;
@@ -26,6 +27,8 @@ public class ListPatient extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Context context;
+    private ProgressBar progressBar;
+
 
     List<Patient> mDetails = new ArrayList<Patient>();
 
@@ -35,6 +38,8 @@ public class ListPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_patient);
+        progressBar = (ProgressBar) findViewById(R.id.progress_list);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.list_recyclerView);
         initRecyclerView();
         addPatient = findViewById(R.id.add_patient);
@@ -46,6 +51,7 @@ public class ListPatient extends AppCompatActivity {
             }
         });
 
+
         patientViewModel = new PatientViewModel(ListPatient.this);
         patientViewModel.getSites().observe(this, new Observer<List<Patient>>() {
             @Override
@@ -56,6 +62,7 @@ public class ListPatient extends AppCompatActivity {
                     System.out.println("Fill Data");
                     mDetails.addAll(patients);
                     mAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });

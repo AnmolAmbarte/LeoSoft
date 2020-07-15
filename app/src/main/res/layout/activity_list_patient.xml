@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ListPatient">
 
+    <ProgressBar
+        android:id="@+id/progress_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="62dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/list_recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/list_recyclerView" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
@@ -30,10 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:textAlignment="center"
             android:background="@color/colorAccent"
-            android:text="Add Patient" />
+            android:text="Add Patient"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

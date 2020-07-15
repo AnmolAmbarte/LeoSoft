@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     PatientViewModel patientViewModel;
 
+    ProgressBar progressBar;
     String[] gender = {"Male", "Female", "Other"};
     Patient patient = new Patient();
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         patientViewModel = new PatientViewModel(MainActivity.this);
+        progressBar = (ProgressBar) findViewById(R.id.progress_main);
 
         patientName = findViewById(R.id.p_name);
         patientUHID = findViewById(R.id.p_uhid);
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
+                progressBar.setVisibility(View.VISIBLE);
                 patient.setName(patientName.getText().toString().trim());
                 patient.setUhid(patientUHID.getText().toString().trim());
                 patient.setAge(patientAge.getText().toString().trim());
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 patient.setPhoneNumber(patientPhoneNumber.getText().toString().trim());
                 patientViewModel.insert(patient);
 
+                progressBar.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(MainActivity.this, ListPatient.class);
                 MainActivity.this.startActivity(intent);
 
